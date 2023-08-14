@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { Editor } from '@monaco-editor/react';
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import examples from './examples';
@@ -16,45 +16,6 @@ function App() {
     editorRef.current = editor;
     modelRef.current = editor.getModel();
     
-    editorRef.current.onDidChangeModelContent((event) => {
-      if (!modelRef.current) return;
-    
-      const fullText = modelRef.current.getValue();
-      const lines = fullText.split('\n');
-    
-      const newTextLines = lines.map((line) => {
-        if (line.length <= maxWidth) {
-          return line;
-        }
-    
-        let currentLine = '';
-        let wrappedLines = [];
-        const words = line.split(' ');
-    
-        for (const word of words) {
-          if (currentLine && (currentLine + ' ' + word).length <= maxWidth) {
-            currentLine += ' ' + word;
-          } else {
-            wrappedLines.push(currentLine);
-            currentLine = word;
-          }
-        }
-    
-        if (currentLine) {
-          wrappedLines.push(currentLine);
-        }
-        
-        return wrappedLines.join('\n');
-      });
-    
-      const newText = newTextLines.join('\n');
-      if (newText !== fullText) {
-        const cursorPosition = editorRef.current.getPosition();
-        modelRef.current.setValue(newText);
-        editorRef.current.setPosition(cursorPosition);
-      }
-    });
-
     // setup monaco-vim
     window.require.config({
       paths: {
@@ -73,6 +34,11 @@ function App() {
     "autoIndent": true,
     "fontSize": 16,
     "scrollBeyondLastLine": false,
+    "wordWrap": "on",
+    "minimap": {
+      "enabled": true,
+      "autohide": true
+    }
   }
 
   return (

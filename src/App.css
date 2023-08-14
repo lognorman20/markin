@@ -1,4 +1,148 @@
+/* Base styles for the entire page */
 body {
-  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
   margin: 0;
+  padding: 0;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+/* Container for content */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Styles for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+/* Styles for paragraphs */
+p {
+  margin-bottom: 1rem;
+}
+
+/* Styles for strong emphasis */
+strong {
+  font-weight: bold;
+}
+
+/* Styles for emphasis */
+em {
+  font-style: italic;
+}
+
+/* Styling for lists */
+ul, ol {
+  margin-left: 10px;
+}
+
+/* Styling for list items */
+li {
+  margin-bottom: 5px;
+}
+
+/* Styling for blockquotes */
+blockquote {
+  border-left: 4px solid #8e44ad;
+  padding-left: 20px;
+  color: #777;
+  margin: 0;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* Styling for links */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Styling for code blocks */
+pre {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  overflow: auto;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+/* Styling for inline code */
+code {
+  font-family: 'Courier New', monospace;
+  background-color: #333;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.9rem;
+}
+
+/* Styling for tables */
+table {
+  width: 100%;
+  background-color: #333; /* Match code block color */
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  border: 1px solid #34495e;
+  padding: 10px;
+  text-align: left;
+}
+
+table th {
+  background-color: #333;
+  color: #ecf0f1;
+}
+
+/* Styling for table dividers */
+table th:not(:last-child),
+table td:not(:last-child) {
+  border-right: 1px solid #34495e;
+}
+
+/* Styling for checkboxes */
+input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #3498db; /* Checkbox fill color when checked */
+  border-color: #3498db; /* Checkbox border color when checked */
+}
+
+/* Hide the default checkbox indicator */
+input[type="checkbox"]::-webkit-check-indicator,
+input[type="checkbox"]::-moz-check-indicator {
+  display: none;
+}
+
+/* Optional styles for label next to the checkbox */
+.checkbox-label {
+  font-size: 14px;
+  margin-left: 8px;
+  color: #e0e0e0; /* Label text color */
+  cursor: pointer;
+}
+
+/* Highlight label when hovering over the checkbox */
+input[type="checkbox"]:hover + .checkbox-label {
+  color: #3498db; /* Highlighted label text color */
 }
