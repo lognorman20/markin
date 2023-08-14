@@ -2,7 +2,7 @@ import rTabs from './utils/rTabs';
 
 const examples = {
     'monaco-example': rTabs(`
-    ## Primes
+    # Primes
 
     It's a playground for examining and playing with prime numbers. It also gives an opportunity to write custom formulas and visualize the results.
 
@@ -29,9 +29,31 @@ const examples = {
 
     To make a production build after the third step run - \`npm run build\` (or \`yarn build\` in case of yarn). After a successful build, you will have a production ready app in the build folder.
 
-    ## License
+    # GFM
 
-    [MIT](./LICENSE)
+    ## Autolink literals
+    
+    www.example.com, https://example.com, and contact@example.com.
+    
+    ## Footnote
+    
+    A note[^1]
+    
+    [^1]: Big note.
+    
+    ## Strikethrough
+    
+    ~one~ or ~~two~~ tildes.
+    
+    ## Table
+    
+    | a | b  |  c |  d  |
+    | - | :- | -: | :-: |
+    
+    ## Tasklist
+    
+    * [ ] to do
+    * [x] done
     `)
 };
 

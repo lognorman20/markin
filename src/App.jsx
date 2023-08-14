@@ -1,30 +1,18 @@
 import { useState, useRef } from 'react'
 import { Editor } from '@monaco-editor/react';
 import { Grid, Typography } from '@mui/material';
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import examples from './examples';
 
 import './App.css'
 
 function App() {
   const editorRef = useRef(null)
+  const [ currentText, setCurrentText ] = useState(examples["monaco-example"]);
 
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor
-    // setup key bindings
-    editor.addAction({
-      // an unique identifier of the contributed action
-      id: "some-unique-id",
-      // a label of the action that will be presented to the user
-      label: "Some label!",
-      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
-
-      // the method that will be executed when the action is triggered.
-      run: function (editor) {
-        alert("we wanna save something => " + editor.getValue());
-        return null;
-      }
-    });
-
     // setup monaco-vim
     window.require.config({
       paths: {
@@ -38,19 +26,17 @@ function App() {
     });
   }
 
-  function getEditorValue() {
-    alert(editorRef.current.getValue())
-  }
-
   const options = {
     "renderWhitespace": "all",
     "autoIndent": true,
     "fontSize": 16,
-    "wordWrap": "on"
+    "wordWrap": "on",
   }
 
   return (
+      // TODO: Add toolbar at the top?
       <Grid container direction="row">
+        {/* where the actual editor goes */}
         <Grid item md={6}>
           <div className="App">
             <Editor 
@@ -60,15 +46,21 @@ function App() {
               defaultValue={examples["monaco-example"]}
               defaultLanguage="markdown"
               onMount={handleEditorDidMount}
+              onChange={() => {
+                setCurrentText(editorRef.current.getValue())
+              }}
               options={options}
             />
           </div>
         </Grid>
-        <Grid item>
-          <Typography variant='h1'>WADDUP</Typography>
+        
+        {/* where the previewer goes */}
+        <Grid item md={6}>
+        <div style={{ height: '100vh', overflow: 'auto' }}>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{currentText}</ReactMarkdown>
+          </div>
         </Grid>
       </Grid>
-
   )
 }
 
