@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from '@mui/material';
+import { IconButton } from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
 
 function SaveButton({ defaultFileName, currentText }) {
     const [filename, setFilename] = useState(defaultFileName);
@@ -24,6 +25,7 @@ function SaveButton({ defaultFileName, currentText }) {
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
+            alert(`successfully downloaded ${inputName}.md to your computer!`);
         }, 0);
     }
 
@@ -40,9 +42,16 @@ function SaveButton({ defaultFileName, currentText }) {
     }
 
     return (
-        <Button variant="contained" color="primary" onClick={downloadMarkdown}>
-            Save
-        </Button>
+        <IconButton
+            onClick={downloadMarkdown}
+            sx={{
+                color: 'primary.dark',
+                padding: 0,
+                paddingRight: 1,
+            }}
+        >
+            <SaveIcon />
+        </IconButton>
     )
 }
 

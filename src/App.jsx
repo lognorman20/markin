@@ -37,17 +37,23 @@ function App() {
     "renderWhitespace": "all",
     "autoIndent": true,
     "fontSize": 16,
-    "scrollBeyondLastLine": false,
     "wordWrap": "on",
     "minimap": {
       "enabled": true,
       "autohide": true
-    }
+    },
   }
 
   return (
     <>
-      <SaveButton currentText={currentText} defaultFileName={filename} />
+      {/* top bar */}
+      <Grid container spacing={2} direction="row-reverse">
+        <Grid item>
+          <SaveButton currentText={currentText} defaultFileName={filename} />
+        </Grid>
+      </Grid>
+
+      {/* editor */}
       <Grid container spacing={2} direction="row">
         <Grid item md={6}>
           <div className="App">
@@ -66,6 +72,7 @@ function App() {
           </div>
         </Grid>
 
+        {/* preview */}
         <Grid item md={6}>
           <div style={{ height: '100vh', overflow: 'auto' }}>
             <ReactMarkdown

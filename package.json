@@ -13,6 +13,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@monaco-editor/react": "^4.5.1",
+    "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.4",
     "monaco-editor": "^0.41.0",
     "monaco-vim": "^0.4.0",
