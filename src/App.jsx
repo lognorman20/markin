@@ -12,7 +12,7 @@ function App() {
   const modelRef = useRef(null);
   const [ currentText, setCurrentText ] = useState(examples["cheese"]);
 
-  function handleEditorDidMount(editor, monaco) {
+  function handleEditorDidMount(editor) {
     editorRef.current = editor;
     modelRef.current = editor.getModel();
     
@@ -42,9 +42,7 @@ function App() {
   }
 
   return (
-      // TODO: Add toolbar at the top?
       <Grid container spacing={2} direction="row">
-        {/* where the actual editor goes */}
         <Grid item md={6}>
           <div className="App">
             <Editor 
@@ -55,7 +53,6 @@ function App() {
               defaultLanguage="markdown"
               onMount={handleEditorDidMount}
               onChange={() => {
-                // 58 characters is the max
                 setCurrentText(editorRef.current.getValue())
               }}
               options={options}
@@ -63,7 +60,6 @@ function App() {
           </div>
         </Grid>
         
-        {/* where the previewer goes */}
         <Grid item md={6}>
         <div style={{ height: '100vh', overflow: 'auto' }}>
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{currentText}</ReactMarkdown>

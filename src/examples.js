@@ -65,17 +65,17 @@ Here are some interesting cheese facts:
 
 Here's an example of how to create a simple cheese class in Python:
 
-\`\`\`python
+\`\`\`javascript
 class Cheese {
-    constructor(name, flavor, origin) {
-        this.name = name;
-        this.flavor = flavor;
-        this.origin = origin;
-    }
+        constructor(name, flavor, origin) {
+            this.name = name;
+            this.flavor = flavor;
+            this.origin = origin;
+        }
 
-    describe() {
-        return \`\${this.name} cheese has a \${this.flavor} flavor and originates from \${this.origin}.\`;
-    }
+        describe() {
+            return \`\${this.name} cheese has a \${this.flavor} flavor and originates from \${this.origin}.\`;
+        }
 }
 
 // Create instances of Cheese
