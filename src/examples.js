@@ -1,60 +1,104 @@
 import rTabs from './utils/rTabs';
 
+const cheeseString = `
+# The Wonderful World of Cheese
+
+Cheese is a delightful and versatile dairy product loved by many. Let's explore some of its varieties, characteristics, and trivia.
+
+## Types of Cheese
+
+Here are some popular types of cheese:
+
+1. **Cheddar**: A sharp, aged cheese with a tangy flavor.
+2. **Brie**: A creamy and soft cheese with a mild aroma.
+3. **Blue Cheese**: Known for its distinctive blue veins and strong taste.
+4. **Parmesan**: A hard and granular cheese often grated over pasta.
+5. **Gouda**: A semi-hard cheese with a buttery and slightly nutty taste.
+
+## Cheese Characteristics
+
+Cheese can vary in terms of:
+
+- **Texture**: Soft, semi-soft, semi-hard, or hard.
+- **Flavor**: Ranging from mild to strong and pungent.
+- **Aroma**: From mild and earthy to intense and tangy.
+
+## Recipe: Cheesy Pasta
+
+Try this simple and cheesy pasta recipe:
+
+Ingredients:
+
+- 250g pasta
+- 1 cup heavy cream
+- 1 cup grated parmesan
+- Salt and pepper to taste
+
+Instructions:
+
+1. Boil the pasta until al dente. Drain and set aside.
+2. In a saucepan, heat the heavy cream over medium heat.
+3. Add the grated parmesan and stir until melted and creamy.
+4. Season with salt and pepper.
+5. Toss the cooked pasta in the creamy cheese sauce.
+6. Serve hot and garnish with additional parmesan if desired.
+
+> "Cheese is milk's leap toward _immortality_." - Clifton Fadiman
+
+## Cheese Trivia
+
+Did you know?
+
+- The world's most expensive cheese is **Pule Cheese**, made from donkey milk.
+- **Feta Cheese** is a staple in Greek cuisine and is traditionally made from sheep's milk.
+- The holes in Swiss cheese are called "eyes."
+
+## Cheese Facts
+
+Here are some interesting cheese facts:
+
+- Cheese-making dates back over **4,000 years**.
+- **Roquefort**, a type of *blue cheese*, is aged in caves.
+- **Camembert** is said to have originated in **Normandy, France**.
+
+## Real World Cheese
+
+Here's an example of how to create a simple cheese class in Python:
+
+\`\`\`python
+class Cheese {
+    constructor(name, flavor, origin) {
+        this.name = name;
+        this.flavor = flavor;
+        this.origin = origin;
+    }
+
+    describe() {
+        return \`\${this.name} cheese has a \${this.flavor} flavor and originates from \${this.origin}.\`;
+    }
+}
+
+// Create instances of Cheese
+const cheddar = new Cheese("Cheddar", "sharp", "England");
+const brie = new Cheese("Brie", "creamy", "France");
+
+console.log(cheddar.describe());
+console.log(brie.describe());
+\`\`\`
+
+## Cheese Varieties
+
+| Cheese Variety | Flavor    | Origin       |
+|----------------|-----------|--------------|
+| Cheddar        | Sharp     | England      |
+| Brie           | Creamy    | France       |
+| Blue Cheese    | Strong    | Various      |
+| Parmesan       | Nutty     | Italy        |
+| Gouda          | Buttery   | Netherlands  |
+`;
+
 const examples = {
-    'monaco-example': rTabs(`
-    # Primes
-
-    It's a playground for examining and playing with prime numbers. It also gives an opportunity to write custom formulas and visualize the results.
-
-    ### Demo
-
-    You can try it simply by opening this [link](https://primes.surenatoyan.com/)
-
-    ### Development
-
-    You also can set up it on your local machine for development (or other) purposes. For that you need:
-
-     - [Nodejs](https://nodejs.org/en/)
-     - npm (it comes with nodejs) - or [yarn](https://yarnpkg.com/en/)
-
-    Run these commands to clone the repository, install dependencies and run the application.
-
-    1) \`git clone https://github.com/SurenAt93/primes.git\`
-    2) \`cd primes\`
-    3) \`npm install\` (or if you are using yarn, just \`yarn\`)
-    4) \`npm run start\` (or \`yarn start\` in case of yarn)
-
-    That's it. After, open \`localhost:3000\` in your browser.
-    Note that by these steps you run the application in development mode. So, you can open the source of it in your preferred text editor and do whatever you want.
-
-    To make a production build after the third step run - \`npm run build\` (or \`yarn build\` in case of yarn). After a successful build, you will have a production ready app in the build folder.
-
-    # GFM
-
-    ## Autolink literals
-    
-    www.example.com, https://example.com, and contact@example.com.
-    
-    ## Footnote
-    
-    A note[^1]
-    
-    [^1]: Big note.
-    
-    ## Strikethrough
-    
-    ~one~ or ~~two~~ tildes.
-    
-    ## Table
-    
-    | a | b  |  c |  d  |
-    | - | :- | -: | :-: |
-    
-    ## Tasklist
-    
-    * [ ] to do
-    * [x] done
-    `)
-};
+    'cheese': rTabs(cheeseString)
+}
 
 export default examples;

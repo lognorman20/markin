@@ -10,7 +10,7 @@ import './App.css'
 function App() {
   const editorRef = useRef(null);
   const modelRef = useRef(null);
-  const [ currentText, setCurrentText ] = useState(examples["monaco-example"]);
+  const [ currentText, setCurrentText ] = useState(examples["cheese"]);
 
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor;
@@ -43,7 +43,7 @@ function App() {
 
   return (
       // TODO: Add toolbar at the top?
-      <Grid container direction="row">
+      <Grid container spacing={2} direction="row">
         {/* where the actual editor goes */}
         <Grid item md={6}>
           <div className="App">
@@ -51,7 +51,7 @@ function App() {
               height="100vh"
               width="100%"
               theme="vs-dark"
-              defaultValue={examples["monaco-example"]}
+              defaultValue={examples["cheese"]}
               defaultLanguage="markdown"
               onMount={handleEditorDidMount}
               onChange={() => {
