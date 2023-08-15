@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { Editor } from '@monaco-editor/react';
+import { VimMode } from 'monaco-vim';
 import { Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -16,6 +17,10 @@ function App() {
   const [currentText, setCurrentText] = useState(examples["cheese"]);
   const [filename, setFilename] = useState(null);
 
+  function clearText() {
+    alert('spotemgotem');
+  }
+
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor;
     modelRef.current = editor.getModel();
@@ -23,13 +28,31 @@ function App() {
     // setup monaco-vim
     window.require.config({
       paths: {
-        "monaco-vim": "https://unpkg.com/monaco-vim/dist/monaco-vim"
+        'vs': 'https://unpkg.com/monaco-editor/min/vs',
+        'monaco-vim': 'https://unpkg.com/monaco-vim/dist/monaco-vim',
       }
     });
 
     window.require(["monaco-vim"], function (MonacoVim) {
-      const statusNode = document.querySelector(".status-node");
-      MonacoVim.initVimMode(editor, statusNode);
+      const statusNode = document.createElement('div');
+      statusNode.style.display = 'flex';
+      statusNode.style.position = 'fixed';
+      statusNode.style.zIndex = '3';
+      statusNode.style.bottom = '0';
+      statusNode.style.left = '0';
+      statusNode.style.color = 'white';
+      statusNode.style.background = '#2d2d30';
+      statusNode.style.width = '100%';
+      statusNode.style.fontSize = '13px';
+      statusNode.style.fontWeight = '500';
+
+      statusNode.addEventListener('change', function() {
+        VimMode.Vim.defineEx('write', 'w', clearText);
+      });
+
+      MonacoVim.initVimMode(editorRef.current, statusNode);
+
+      document.body.appendChild(statusNode);
     });
   }
 
@@ -85,7 +108,6 @@ function App() {
                     <SyntaxHighlighter
                       {...props}
                       children={String(children).replace(/\n$/, '')}
-                      // useInlineStyles={false}
                       style={tomorrow}
                       language={match[1]}
                       PreTag="div"
