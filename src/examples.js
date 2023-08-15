@@ -86,6 +86,8 @@ console.log(cheddar.describe());
 console.log(brie.describe());
 \`\`\`
 
+This \`Cheese\` class can be used for all of your cheese related needs.
+
 ## Cheese Varieties
 
 | Cheese Variety | Flavor    | Origin       |
