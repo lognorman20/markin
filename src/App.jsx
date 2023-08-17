@@ -16,7 +16,11 @@ function App() {
   const editorRef = useRef(null);
   const modelRef = useRef(null);
   const [currentText, setCurrentText] = useState(examples["cheese"]);
-  const [filename, setFilename] = useState(null);
+  const [filename, setFilename] = useState('Your File');
+
+  function handleSetFilename(newFilename) {
+    setFilename(newFilename);
+  }
 
   // function clearText() {
   //   alert('spotemgotem');
@@ -77,10 +81,10 @@ function App() {
           <SaveButton currentText={currentText} defaultFileName={filename} />
         </Grid>
         <Grid item>
-          <DeployButton  currentText={currentText}  />
+          <DeployButton  currentText={currentText} />
         </Grid>
         <Grid item>
-          <FilenameInput />
+          <FilenameInput onInputSubmit={handleSetFilename} defaultFilename={filename} />
         </Grid>
       </Grid>
 

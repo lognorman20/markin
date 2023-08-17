@@ -42,24 +42,36 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-function FilenameInput() {
+function FilenameInput({ onInputSubmit, defaultFilename }) {
     const inputRef = useRef(null);
+    const [filename, setFilename] = useState(defaultFilename);
+
+    const handleInputChange = (event) => {
+        setFilename(event.target.value);
+      };
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
             inputRef.current.blur();
+            onInputSubmit(filename);
         }
+    };
+
+    const handleBlur = () => {
+        onInputSubmit(filename);
     };
 
     return (
         <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input" />
             <BootstrapInput
-                defaultValue="Your File"
+                value={filename}
                 id="bootstrap-input"
                 inputRef={inputRef}
+                onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
+                onBlur={handleBlur}
             />
         </FormControl>
     );

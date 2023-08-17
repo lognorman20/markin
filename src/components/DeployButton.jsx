@@ -10,11 +10,11 @@ const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function DeployButton({ currentText }) {
+function DeployButton({ currentText, defaultFilename }) {
     const md = new MarkdownIt();
     const [deployOpen, setDeployOpen] = React.useState(false);
     const [successOpen, setSuccessOpen] = React.useState(false);
-    const [filename, setFilename] = React.useState('');
+    const [filename, setFilename] = useState(defaultFilename);
 
     const handleDeployClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -70,15 +70,34 @@ function DeployButton({ currentText }) {
         return html;
     }
 
+    function kebabCase(inputString) {
+        if (!inputString) {
+            inputString = 'your-file';
+        }
+
+        const letters = 'abcdefghijklmnopqrstuvwxyz';
+        let randomLetters = '';
+        for (let i = 0; i < 3; i++) {
+            const randomIndex = Math.floor(Math.random() * letters.length);
+            randomLetters += letters.charAt(randomIndex);
+        }
+    
+        const kebabCaseString = inputString
+            .replace(/[^a-zA-Z0-9\s]/g, '') // Remove non-alphanumeric characters except spaces
+            .replace(/\s+/g, '-') // Replace spaces with hyphens
+            .toLowerCase(); // Convert to lowercase
+        
+        return kebabCaseString + '-' + randomLetters;
+    }
+
     function handleDeployClick() {
         setDeployOpen(true);
 
         const htmlContent = mdToHtml();
-        // TODO: Change from random string to word
-        const randomString = Array.from({ length: 5 }, () => Math.floor(Math.random() * 10)).join('');
-        setFilename(randomString);
+        const kebabFilename = kebabCase(filename);
+        setFilename(kebabCase);
 
-        deployWebsite(htmlContent, randomString);
+        deployWebsite(htmlContent, kebabFilename);
     }
 
     return (
