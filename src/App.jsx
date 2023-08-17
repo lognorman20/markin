@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { Editor } from '@monaco-editor/react';
-import { VimMode } from 'monaco-vim';
-import { Button, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -18,9 +17,9 @@ function App() {
   const [currentText, setCurrentText] = useState(examples["cheese"]);
   const [filename, setFilename] = useState(null);
 
-  function clearText() {
-    alert('spotemgotem');
-  }
+  // function clearText() {
+  //   alert('spotemgotem');
+  // }
 
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor;

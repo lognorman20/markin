@@ -47,7 +47,6 @@ function DeployButton({ currentText }) {
         // TODO: Change from random string to word
         const randomString = Array.from({ length: 5 }, () => Math.floor(Math.random() * 10)).join('');
         const filename = randomString;
-        console.log(filename);
 
         deployWebsite(htmlContent, filename);
     }
