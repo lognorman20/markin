@@ -1,19 +1,22 @@
-import { useState, useRef } from 'react'
+import { useState, useRef } from 'react';
 import { Editor } from '@monaco-editor/react';
 import { VimMode } from 'monaco-vim';
 import { Button, Grid } from '@mui/material';
-import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import remarkGfm from 'remark-gfm'
+import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import remarkGfm from 'remark-gfm';
+import showdown from 'showdown';
 import examples from './examples';
 import SaveButton from './components/SaveButton';
+import MarkdownIt from 'markdown-it';
 
 import './App.css'
 
 function App() {
   const editorRef = useRef(null);
   const modelRef = useRef(null);
+  const md = new MarkdownIt();
   const [currentText, setCurrentText] = useState(examples["cheese"]);
   const [filename, setFilename] = useState(null);
 
@@ -85,6 +88,7 @@ function App() {
       });
   
       if (response.ok) {
+        console.log(response);
         console.log('Website creation successful.');
         alert(`Check out your new website at markin-${filename}.web.app`);
       } else {
@@ -95,9 +99,15 @@ function App() {
     }
   }
 
+  function mdToHtml() {
+    const html = md.render(currentText);
+    console.log(html);
+    return html;
+  }
+
   function handleDeployClick() {
-    const htmlContent = "<!DOCTYPE html><html><head><title>Oh yea, kaboii</title></head><body><h1>THIS IS THE PAGE</h1><p>This is a sample HTML content with 'single quotes' and \"double quotes\".</p></body></html>";
-    const filename = "duffy";
+    const htmlContent = mdToHtml();
+    const filename = "testingfr";
 
     deployWebsite(htmlContent, filename);
   }
@@ -110,7 +120,7 @@ function App() {
           <SaveButton currentText={currentText} defaultFileName={filename} />
         </Grid>
         <Grid item>
-          <Button onClick={handleDeployClick}>deploy</Button>
+          <Button onClick={mdToHtml}>deploy</Button>
         </Grid>
       </Grid>
 
