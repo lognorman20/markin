@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm';
 import examples from './examples';
 import SaveButton from './components/SaveButton';
 import DeployButton from './components/DeployButton';
+import FilenameInput from './components/FilenameInput';
 
 import './App.css'
 
@@ -71,17 +72,20 @@ function App() {
   return (
     <>
       {/* top bar */}
-      <Grid container spacing={2} direction="row-reverse">
+      <Grid container paddingTop={1} spacing={2} direction="row-reverse">
         <Grid item>
           <SaveButton currentText={currentText} defaultFileName={filename} />
         </Grid>
         <Grid item>
           <DeployButton  currentText={currentText}  />
         </Grid>
+        <Grid item>
+          <FilenameInput />
+        </Grid>
       </Grid>
 
       {/* editor */}
-      <Grid container spacing={2} direction="row" alignContent={"center"}>
+      <Grid container spacing={2} direction="row" alignItems={"center"}>
         <Grid item md={6}>
           <div className="App">
             <Editor

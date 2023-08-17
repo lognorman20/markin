@@ -89,6 +89,7 @@ function DeployButton({ currentText }) {
                     color: 'primary.dark',
                     padding: 0,
                     paddingRight: 1,
+                    textTransform: 'none',
                 }}
             >
                 Deploy
