@@ -65,25 +65,39 @@ Here are some interesting cheese facts:
 
 Here's an example of how to create a simple cheese class in Python:
 
-\`\`\`javascript
-class Cheese {
-        constructor(name, flavor, origin) {
-            this.name = name;
-            this.flavor = flavor;
-            this.origin = origin;
-        }
-
-        describe() {
-            return \`\${this.name} cheese has a \${this.flavor} flavor and originates from \${this.origin}.\`;
-        }
+\`\`\`ocaml
+(* Define a cheese type *)
+type cheese = {
+    name : string;
+    flavor : string;
+    origin : string;
 }
 
-// Create instances of Cheese
-const cheddar = new Cheese("Cheddar", "sharp", "England");
-const brie = new Cheese("Brie", "creamy", "France");
+(* Recursive function to create a list of cheeses *)
+let rec create_cheese_list count =
+    match count with
+    | 0 -> []
+    | n ->
+        let new_cheese = {
+            name = "Cheese" ^ string_of_int n;
+            flavor = "Flavor" ^ string_of_int n;
+            origin = "Origin" ^ string_of_int n;
+        } in
+        new_cheese :: create_cheese_list (n - 1)
 
-console.log(cheddar.describe());
-console.log(brie.describe());
+(* Currying function to filter cheeses based on flavor *)
+let filter_cheeses_by_flavor flavor cheeses =
+    List.filter (fun cheese -> cheese.flavor = flavor) cheeses
+
+let () =
+    (* Create a list of cheeses *)
+    let cheese_list = create_cheese_list 5 in
+    List.iter (fun cheese -> Printf.printf "Name: %s, Flavor: %s\n" cheese.name cheese.flavor) cheese_list;
+
+    (* Filter cheeses by flavor *)
+    let filtered_cheeses = filter_cheeses_by_flavor "Flavor3" cheese_list in
+    Printf.printf "\nFiltered cheeses:\n";
+    List.iter (fun cheese -> Printf.printf "Name: %s, Flavor: %s\n" cheese.name cheese.flavor) filtered_cheeses;
 \`\`\`
 
 This \`Cheese\` class can be used for all of your cheese related needs.

@@ -88,7 +88,10 @@ function App() {
       });
   
       if (response.ok) {
-        console.log(response);
+        const json = response.json();
+        console.log(json);
+        console.log(htmlContent);
+        
         console.log('Website creation successful.');
         alert(`Check out your new website at markin-${filename}.web.app`);
       } else {
@@ -101,13 +104,14 @@ function App() {
 
   function mdToHtml() {
     const html = md.render(currentText);
-    console.log(html);
     return html;
   }
 
   function handleDeployClick() {
     const htmlContent = mdToHtml();
-    const filename = "testingfr";
+    const randomString = Array.from({ length: 5 }, () => Math.floor(Math.random() * 10)).join('');
+    const filename = randomString;
+    console.log(filename);
 
     deployWebsite(htmlContent, filename);
   }
@@ -120,7 +124,7 @@ function App() {
           <SaveButton currentText={currentText} defaultFileName={filename} />
         </Grid>
         <Grid item>
-          <Button onClick={mdToHtml}>deploy</Button>
+          <Button onClick={handleDeployClick}>deploy</Button>
         </Grid>
       </Grid>
 
