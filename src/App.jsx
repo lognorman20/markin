@@ -6,17 +6,15 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
-import showdown from 'showdown';
 import examples from './examples';
 import SaveButton from './components/SaveButton';
-import MarkdownIt from 'markdown-it';
+import DeployButton from './components/DeployButton';
 
 import './App.css'
 
 function App() {
   const editorRef = useRef(null);
   const modelRef = useRef(null);
-  const md = new MarkdownIt();
   const [currentText, setCurrentText] = useState(examples["cheese"]);
   const [filename, setFilename] = useState(null);
 
@@ -49,9 +47,10 @@ function App() {
       statusNode.style.fontSize = '13px';
       statusNode.style.fontWeight = '500';
 
-      statusNode.addEventListener('change', function() {
-        VimMode.Vim.defineEx('write', 'w', clearText);
-      });
+      // BLOCKED: This doesn't work, reached out to developer for help
+      // statusNode.addEventListener('change', function() {
+      //   VimMode.Vim.defineEx('write', 'w', clearText);
+      // });
 
       MonacoVim.initVimMode(editorRef.current, statusNode);
 
@@ -70,52 +69,6 @@ function App() {
     },
   }
 
-  async function deployWebsite(htmlContent, filename) {
-    const data = {
-      html: htmlContent,
-      filename: filename
-    };
-
-    console.log('trying to deploy website..');
-  
-    try {
-      const response = await fetch('https://fir-server-123.web.app/create-html', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-  
-      if (response.ok) {
-        const json = response.json();
-        console.log(json);
-        console.log(htmlContent);
-        
-        console.log('Website creation successful.');
-        alert(`Check out your new website at markin-${filename}.web.app`);
-      } else {
-        console.error('Website creation failed');
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  }
-
-  function mdToHtml() {
-    const html = md.render(currentText);
-    return html;
-  }
-
-  function handleDeployClick() {
-    const htmlContent = mdToHtml();
-    const randomString = Array.from({ length: 5 }, () => Math.floor(Math.random() * 10)).join('');
-    const filename = randomString;
-    console.log(filename);
-
-    deployWebsite(htmlContent, filename);
-  }
-
   return (
     <>
       {/* top bar */}
@@ -124,7 +77,7 @@ function App() {
           <SaveButton currentText={currentText} defaultFileName={filename} />
         </Grid>
         <Grid item>
-          <Button onClick={handleDeployClick}>deploy</Button>
+          <DeployButton currentText={currentText} />
         </Grid>
       </Grid>
 
