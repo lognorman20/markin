@@ -76,12 +76,12 @@ function App() {
           <SaveButton currentText={currentText} defaultFileName={filename} />
         </Grid>
         <Grid item>
-          <DeployButton currentText={currentText} />
+          <DeployButton  currentText={currentText}  />
         </Grid>
       </Grid>
 
       {/* editor */}
-      <Grid container spacing={2} direction="row">
+      <Grid container spacing={2} direction="row" alignContent={"center"}>
         <Grid item md={6}>
           <div className="App">
             <Editor
