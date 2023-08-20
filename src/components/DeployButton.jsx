@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -14,7 +14,11 @@ function DeployButton({ currentText, defaultFilename }) {
     const md = new MarkdownIt();
     const [deployOpen, setDeployOpen] = React.useState(false);
     const [successOpen, setSuccessOpen] = React.useState(false);
-    const [filename, setFilename] = useState(defaultFilename);
+    const [realName, setRealName] = React.useState(defaultFilename);
+
+    useEffect(() => {
+        setRealName(defaultFilename);
+    }, [defaultFilename]);
 
     const handleDeployClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -32,14 +36,20 @@ function DeployButton({ currentText, defaultFilename }) {
         setSuccessOpen(false);
     };
 
-    async function deployWebsite(htmlContent, name) {
+    async function deployWebsite(htmlContent, websiteName) {
+        if (!websiteName | websiteName.includes('your-file')) {
+            console.log(`website name null or set to generic: ${websiteName}`);
+        } else {
+            console.log(`the website name passed in is ${websiteName}`);
+        }
+
         const data = {
             html: htmlContent,
-            filename: name
+            filename: websiteName
         };
 
         console.log('trying to deploy website..');
-        console.log(`filename: ${name}`);
+        console.log(`filename: ${websiteName}`);
 
         try {
             const response = await fetch('https://fir-server-123.web.app/create-html', {
@@ -53,7 +63,6 @@ function DeployButton({ currentText, defaultFilename }) {
             if (response.ok) {
                 const json = response.json();
                 console.log(json);
-                console.log(htmlContent);
 
                 console.log('Website creation successful.');
                 setSuccessOpen(true);
@@ -71,9 +80,13 @@ function DeployButton({ currentText, defaultFilename }) {
     }
 
     function kebabCase(inputString) {
+        console.log(`input to kebab fn: ${inputString}`);
+
         if (!inputString) {
-            inputString = 'your-file';
+            console.log("nah that didnt' work");
+            inputString = 'your file';
         }
+
 
         const letters = 'abcdefghijklmnopqrstuvwxyz';
         let randomLetters = '';
@@ -91,11 +104,11 @@ function DeployButton({ currentText, defaultFilename }) {
     }
 
     function handleDeployClick() {
+        // console.log(`filename before kebab: ${name}`);
         setDeployOpen(true);
 
         const htmlContent = mdToHtml();
-        const kebabFilename = kebabCase(filename);
-        setFilename(kebabCase);
+        const kebabFilename = kebabCase(realName);
 
         deployWebsite(htmlContent, kebabFilename);
     }
@@ -137,7 +150,7 @@ function DeployButton({ currentText, defaultFilename }) {
               }
             >
                 <Alert onClose={handleSuccessClose} severity="success" sx={{ width: '100%' }}>
-                    Check out your new website at markin-{filename}.web.app
+                    Check out your new website at markin-{realName}.web.app
                 </Alert>
             </Snackbar>
         </>

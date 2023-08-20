@@ -78,18 +78,19 @@ function App() {
       {/* top bar */}
       <Grid container paddingTop={1} spacing={2} direction="row-reverse">
         <Grid item>
-          <SaveButton currentText={currentText} defaultFileName={filename} />
+          {/* <SaveButton currentText={currentText} defaultFileName={filename} /> */}
         </Grid>
         <Grid item>
-          <DeployButton  currentText={currentText} />
+          <DeployButton currentText={currentText} defaultFilename={filename}/>
         </Grid>
         <Grid item>
           <FilenameInput onInputSubmit={handleSetFilename} defaultFilename={filename} />
         </Grid>
       </Grid>
 
-      {/* editor */}
+      {/* main section */}
       <Grid container spacing={2} direction="row" alignItems={"center"}>
+        {/* editor */}
         <Grid item md={6}>
           <div className="App">
             <Editor
@@ -139,4 +140,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
