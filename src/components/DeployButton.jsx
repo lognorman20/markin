@@ -61,6 +61,7 @@ function DeployButton({ currentText, defaultFilename }) {
             });
 
             if (response.ok) {
+                setDeployOpen(false);
                 const json = response.json();
                 console.log(json);
 
@@ -104,12 +105,12 @@ function DeployButton({ currentText, defaultFilename }) {
     }
 
     function handleDeployClick() {
-        // console.log(`filename before kebab: ${name}`);
         setDeployOpen(true);
 
         const htmlContent = mdToHtml();
         const kebabFilename = kebabCase(realName);
 
+        setRealName(kebabFilename);
         deployWebsite(htmlContent, kebabFilename);
     }
 
@@ -127,7 +128,7 @@ function DeployButton({ currentText, defaultFilename }) {
                 Deploy
             </Button>
 
-            <Snackbar open={deployOpen} autoHideDuration={4000} onClose={handleDeployClose}>
+            <Snackbar open={deployOpen} onClose={handleDeployClose}>
                 <Alert onClose={handleDeployClose} severity="info" sx={{ width: '100%' }}>
                     Deploying website...
                 </Alert>
