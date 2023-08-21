@@ -2,7 +2,7 @@
 
 Markin is a Markdown text editor with vim bindings and a publishing capability. Create, edit, and deploy Markdown based websites all with Vim keybindings in one place.
 
-Give it a try at **[markin.app](markin.app)**
+Try it live: **[markin.app](www.markin.app)**
 
 [Markin Demo Video](https://youtu.be/jh_Wdydymrk)
 
