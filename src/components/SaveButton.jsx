@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
+import CloseIcon from '@mui/icons-material/Close';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function SaveButton({ defaultFileName, currentText }) {
     const [filename, setFilename] = useState(defaultFileName);
+    const [errorOpen, setErrorOpen] = React.useState(false);
 
-    function download(inputName) {
-        if (!inputName) {
-            alert('download failed -- you need to give me a filename bro');
+    useEffect(() => {
+        setFilename(defaultFileName);
+    }, [defaultFileName]);
+
+    const handleErrorClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+
+        setErrorOpen(false);
+    };
+
+    function download() {
+        if (!filename) {
+            setErrorOpen(true);
             return;
         }
 
@@ -16,7 +36,7 @@ function SaveButton({ defaultFileName, currentText }) {
 
         const link = document.createElement('a');
         link.href = url;
-        link.download = inputName;
+        link.download = filename;
 
         document.body.appendChild(link);
 
@@ -25,33 +45,44 @@ function SaveButton({ defaultFileName, currentText }) {
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
-            alert(`successfully downloaded ${inputName}.md to your computer!`);
+            alert(`successfully downloaded ${filename}.md to your computer!`);
         }, 0);
     }
 
-    function downloadMarkdown() {
-        if (!filename) {
-            const newFilename = prompt('Enter a filename');
-            if (newFilename !== null) {
-                setFilename(newFilename);
-                download(newFilename);
-            }
-        } else {
-            download(filename);
-        }
-    }
-
     return (
-        <IconButton
-            onClick={downloadMarkdown}
-            sx={{
-                color: 'primary.dark',
-                padding: 0,
-                paddingRight: 1,
-            }}
-        >
-            <SaveIcon />
-        </IconButton>
+        <>
+            <IconButton
+                onClick={download}
+                sx={{
+                    color: 'primary.dark',
+                    padding: 0,
+                    paddingRight: 1,
+                }}
+            >
+                <SaveIcon />
+            </IconButton>
+            <Snackbar 
+                open={errorOpen}
+                autoHideDuration={5000}
+                onClose={handleErrorClose}
+                action={
+                <React.Fragment>
+                    <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    sx={{ p: 0.5 }}
+                    onClick={handleErrorClose}
+                    >
+                    <CloseIcon />
+                    </IconButton>
+                </React.Fragment>
+                }
+            >
+                <Alert onClose={handleErrorClose} autoHideDuration={5000} severity="error" sx={{ width: '100%' }}>
+                    Failed to save: u need to give me a good filename bro
+                </Alert>
+            </Snackbar>
+        </>
     )
 }
 

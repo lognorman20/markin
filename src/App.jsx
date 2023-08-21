@@ -78,7 +78,7 @@ function App() {
       {/* top bar */}
       <Grid container paddingTop={1} spacing={2} direction="row-reverse">
         <Grid item>
-          {/* <SaveButton currentText={currentText} defaultFileName={filename} /> */}
+          <SaveButton currentText={currentText} defaultFileName={filename} />
         </Grid>
         <Grid item>
           <DeployButton currentText={currentText} defaultFilename={filename}/>
