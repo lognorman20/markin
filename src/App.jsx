@@ -16,7 +16,7 @@ function App() {
   const editorRef = useRef(null);
   const modelRef = useRef(null);
   const [currentText, setCurrentText] = useState(examples["cheese"]);
-  const [filename, setFilename] = useState('Your File');
+  const [filename, setFilename] = useState('Your Filename');
 
   function handleSetFilename(newFilename) {
     setFilename(newFilename);

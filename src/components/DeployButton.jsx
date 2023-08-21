@@ -151,7 +151,7 @@ function DeployButton({ currentText, defaultFilename }) {
               }
             >
                 <Alert onClose={handleSuccessClose} severity="success" sx={{ width: '100%' }}>
-                    Check out your new website at markin-{realName}.web.app
+                    Check out your new website at markin-{realName}.firebaseapp.com
                 </Alert>
             </Snackbar>
         </>
