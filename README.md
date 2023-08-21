@@ -1,8 +1,7 @@
-# React + Vite
+# Markin
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Markin is a Markdown text editor with vim bindings and a publishing capability. Create, edit, and deploy Markdown based websites all with Vim keybindings in one place.
 
-Currently, two official plugins are available:
+[Markin Demo Video](https://youtu.be/jh_Wdydymrk)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![image](https://github.com/lognorman20/markin/assets/68346355/f79f35ed-bea5-425f-81a6-2924fa102654)
